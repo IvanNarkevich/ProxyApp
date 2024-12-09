@@ -1,0 +1,54 @@
+﻿@model ProxyApp.Models.StatisticViewModel
+@{
+    ViewData["Title"] = "Домашняя страница";
+}
+
+<h1 class="display-4">Разрешённые значения:</h1>
+<form method="POST" action="/home/Index">
+    <div>
+        <label>Обзорная карта:</label>
+        <input name="Allowed_C01_Belarus_WGS84" type="number" value="@Model.Allowed_C01_Belarus_WGS84" />
+    </div>
+    <div>
+        <label>Населенные пункты:</label> <input name="Allowed_A06_ATE_TE_WGS84" type="number" value="@Model.Allowed_A06_ATE_TE_WGS84" />
+
+    </div> 
+    <div>
+         <label>Земельные участки:</label>
+         <input name="Allowed_A05_EGRNI_WGS84" type="number" value="@Model.Allowed_A05_EGRNI_WGS84" />
+
+    </div>
+    <div>
+         <label>Виды земель:</label>
+         <input name="Allowed_A01_ZIS_WGS84" type="number" value="@Model.Allowed_A01_ZIS_WGS84" />
+    </div>
+    <input type="submit" value="Сохранить"/>
+</form>
+<h1 class="display-4">Статистика</h1>
+<table>
+    <tr>
+        <th></th>
+        <th>Обработано</th>
+        <th>Разрешено</th>
+    </tr>
+    <tr>
+        <td>Обзорная карта:</td>
+        <td>@Model.Made_C01_Belarus_WGS84</td>
+        <td>@Model.Allowed_C01_Belarus_WGS84</td>
+    </tr>
+    <tr>
+        <td>Населенные пункты:</td>
+        <td>@Model.Made_A06_ATE_TE_WGS84</td>
+        <td>@Model.Allowed_A06_ATE_TE_WGS84</td>
+    </tr>
+    <tr>
+        <td>Земельные участки:</td>
+        <td>@Model.Made_A05_EGRNI_WGS84</td>
+        <td>@Model.Allowed_A05_EGRNI_WGS84</td>
+    </tr>
+    <tr>
+        <td>Виды земель:</td>
+        <td>@Model.Made_A01_ZIS_WGS84</td>
+        <td>@Model.Allowed_A01_ZIS_WGS84</td>
+    </tr>
+</table>

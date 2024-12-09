@@ -1,0 +1,37 @@
+name: proxy_services
+services:
+  proxyapp:
+    container_name: proxyapp
+    build:
+      context: .
+      dockerfile: ProxyApp/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password1!
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/dockercert.pfx
+    ports:
+      - "7121:80"
+      - "7122:443"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on:
+      - docker_sqlserver 
+      - redis_server
+    links:
+      - redis_server
+
+  docker_sqlserver:
+    container_name: docker_sqlserver
+    build:
+      context: .
+      dockerfile: ProxyApp/db.Dockerfile
+    ports:
+      - "1433:1433"
+  redis_server:
+    container_name: redis_server
+    image: redis
+    ports:
+      - "6379:6379"
+
+
